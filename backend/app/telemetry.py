@@ -30,21 +30,21 @@ class AstronautTelemetry:
         if self.mode == "NORMAL":
             target_hr = 72
             target_activity = 30
-            target_temp = 37.9
+            target_temp = 36.7
             target_spo2 = 98.5
             resp_ratio = 4.5  # ~16 breaths/min at 72bpm
             
         elif self.mode == "WORKLOAD":
             target_hr = 115
             target_activity = 80
-            target_temp = 38.8
+            target_temp = 37.4
             target_spo2 = 97.5
             resp_ratio = 4.2 # Faster breathing under phyiscal load
         
         else: #Health Deviation
             target_hr = 110
             target_activity = 10
-            target_temp = 39.8
+            target_temp = 39.0
             target_spo2 = 93.0
             resp_ratio = 4.0 # Rapid, shallow breathing
             

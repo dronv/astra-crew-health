@@ -1,28 +1,34 @@
 import asyncio
 from contextlib import asynccontextmanager
-from pathlib import Path
+import logging
+import time
 
-import pandas as pd
 from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from pydantic import BaseModel
 
-# from app.ml.demo import run_demo
-# from app.ml.predict import CognitiveModel
 from app.research import router as research_router
+from app.telemetry_store import (save_telemetry_snapshot,get_latest_telemetry)
 from app.database import init_database
 from app.crew.daily_logs import router as crew_router
 from app.crew.demo import router as demo_router
 from app.mission import (router as mission_router,init_mission_table)
-from .health import HealthMonitor
 from app.readiness.mission_readiness import (router as mission_readiness_router)
+from app.readiness.fitness_api import (router as fitness_router)
+from app.assessment.api import router as assessment_router
+from app.awareness.router import router as awareness_router
+
+from .health import HealthMonitor
+
 from .telemetry import AstronautTelemetry
 
 
 astronaut = AstronautTelemetry()
 health_monitor = HealthMonitor()
-# cognitive_model = CognitiveModel()
 
+logger = logging.getLogger(__name__)
+
+TELEMETRY_SAVE_INTERVAL = 30
+SIMULATED_ASTRONAUT_ID = "CREW-001"
 
 class ConnectionManager:
     def __init__(self):
@@ -50,17 +56,61 @@ class ConnectionManager:
 manager = ConnectionManager()
 
 
-async def telemetry_loop():
-    """Single source of truth generating telemetry once per second."""
-    while True:
-        telemetry = astronaut.generate()
-        health = health_monitor.update(telemetry)
 
-        if manager.active_connections:
-            await manager.broadcast({
-                "telemetry": telemetry,
-                "health": health,
-            })
+async def telemetry_loop():
+    """
+    Generate telemetry once per second.
+
+    Broadcast every second.
+    Persist a synthetic snapshot every 30 seconds.
+    """
+
+    last_saved_at = None
+
+    while True:
+        try:
+            telemetry = astronaut.generate()
+            health = health_monitor.update(telemetry)
+
+            now = time.monotonic()
+
+            should_save = (
+                last_saved_at is None
+                or now - last_saved_at
+                >= TELEMETRY_SAVE_INTERVAL
+            )
+
+            if should_save:
+                try:
+                    # SQLite is synchronous. Run database
+                    # operations outside the event loop.
+                    saved = await asyncio.to_thread(
+                        save_telemetry_snapshot,
+                        SIMULATED_ASTRONAUT_ID,
+                        telemetry,
+                    )
+
+                    if saved > 0:
+                        last_saved_at = now
+
+                except Exception:
+                    logger.exception(
+                        "Unable to persist telemetry snapshot"
+                    )
+
+            if manager.active_connections:
+                await manager.broadcast({
+                    "telemetry": telemetry,
+                    "health": health,
+                })
+
+        except asyncio.CancelledError:
+            raise
+
+        except Exception:
+            logger.exception(
+                "Telemetry generation failed"
+            )
 
         await asyncio.sleep(1)
 
@@ -79,14 +129,6 @@ async def lifespan(app: FastAPI):
         await task
     except asyncio.CancelledError:
         pass
-
-
-class AstronautAssessment(BaseModel):
-    vo2max: float | None = None
-    premission_vo2max: float | None = None
-    deadlift_bodyweight_ratio: float | None = None
-    bench_press_bodyweight_ratio: float | None = None
-
 
 app = FastAPI(
     title="ASTRA LAB",
@@ -111,6 +153,9 @@ app.include_router(crew_router)
 app.include_router(mission_router)
 app.include_router(demo_router)
 app.include_router(mission_readiness_router)
+app.include_router(fitness_router)
+app.include_router(assessment_router)
+app.include_router(awareness_router)
 
 @app.get("/")
 def root():
@@ -118,17 +163,6 @@ def root():
         "system": "ASTRA",
         "status": "online",
     }
-
-
-@app.post("/api/readiness/{mission}")
-def readiness(
-    mission: str,
-    astronaut_data: AstronautAssessment,
-):
-    return assess_readiness(
-        mission,
-        astronaut_data.model_dump(),
-    )
 
 
 @app.websocket("/ws/telemetry")
@@ -157,33 +191,10 @@ def simulation_mode(mode: str):
             detail=str(exc),
         )
 
-
-# @app.get("/api/cognitive/test")
-# def test_cognitive_model():
-#     data_file = (
-#         Path(__file__).resolve().parents[1]
-#         / "data"
-#         / "physiological"
-#         / "nasa_crew"
-#         / "raw"
-#         / "26"
-#         / "26_LOFT.csv"
-#     )
-
-#     df = pd.read_csv(data_file)
-
-#     # 10 seconds * 256 Hz
-#     window = df.iloc[:2560]
-
-#     return cognitive_model.predict(window)
-
-
-# @app.get("/api/cognitive/demo/{scenario}")
-# def cognitive_demo(scenario: str):
-#     try:
-#         return run_demo(scenario)
-#     except ValueError as exc:
-#         raise HTTPException(
-#             status_code=400,
-#             detail=str(exc),
-#         )
+@app.get("/api/telemetry/latest/{astronaut_id}")
+async def latest_telemetry(astronaut_id: str):
+    return await asyncio.to_thread(
+        get_latest_telemetry,
+        astronaut_id,
+        True,
+    )

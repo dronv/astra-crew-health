@@ -46,3 +46,110 @@ def init_database():
             CREATE INDEX IF NOT EXISTS idx_crew_logs_astronaut_date
             ON crew_daily_logs(astronaut_id, log_date)
         """)
+
+        connection.execute("""
+        CREATE TABLE IF NOT EXISTS crew_fitness_measurements (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            astronaut_id TEXT NOT NULL,
+            mission_id INTEGER,
+            measured_at_utc TEXT NOT NULL,
+            assessment_phase TEXT NOT NULL,
+            vo2max REAL,
+            premission_vo2max REAL,
+            deadlift_kg REAL,
+            bench_press_kg REAL,
+            bodyweight_kg REAL,
+            muscle_strength REAL,
+            premission_muscle_strength REAL,
+            is_synthetic INTEGER NOT NULL DEFAULT 0,
+            notes TEXT,
+            created_at_utc TEXT NOT NULL
+        )
+    """)
+
+        
+        connection.execute("""
+            CREATE TABLE IF NOT EXISTS crew_health_observations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                astronaut_id TEXT NOT NULL,
+                mission_id TEXT,
+                measured_at_utc TEXT NOT NULL,
+                assessment_phase TEXT NOT NULL
+                    CHECK (assessment_phase IN (
+                        'pre_mission', 'in_mission'
+                    )),
+                metric TEXT NOT NULL,
+                value REAL NOT NULL,
+                unit TEXT NOT NULL,
+                source TEXT NOT NULL DEFAULT 'manual',
+                is_synthetic INTEGER NOT NULL DEFAULT 0,
+                notes TEXT,
+                created_at_utc TEXT DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+        connection.execute("""
+            CREATE INDEX IF NOT EXISTS
+                idx_health_observations_lookup
+            ON crew_health_observations (
+                astronaut_id,
+                metric,
+                measured_at_utc DESC
+            )
+        """)
+
+        connection.execute("""
+            CREATE TABLE IF NOT EXISTS crew_telemetry_observations (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                astronaut_id TEXT NOT NULL,
+                mission_id TEXT,
+                measured_at_utc TEXT NOT NULL,
+                metric TEXT NOT NULL,
+                value REAL NOT NULL,
+                unit TEXT NOT NULL,
+                source TEXT NOT NULL DEFAULT 'telemetry',
+                is_synthetic INTEGER NOT NULL DEFAULT 1,
+                created_at_utc TEXT DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+        connection.execute("""
+            CREATE INDEX IF NOT EXISTS
+                idx_telemetry_observations_lookup
+            ON crew_telemetry_observations (
+                astronaut_id,
+                metric,
+                measured_at_utc DESC
+            )
+        """)
+
+
+        connection.execute("""
+            CREATE TABLE IF NOT EXISTS crew_questionnaire_responses (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                astronaut_id TEXT NOT NULL,
+                mission_id INTEGER,
+                assessment_phase TEXT NOT NULL
+                    CHECK (assessment_phase IN (
+                        'pre_mission', 'in_mission'
+                    )),
+                measured_at_utc TEXT NOT NULL,
+                activity TEXT NOT NULL,
+                symptoms TEXT NOT NULL,
+                sleep TEXT NOT NULL,
+                stress TEXT NOT NULL,
+                is_synthetic INTEGER NOT NULL DEFAULT 0,
+                created_at_utc TEXT DEFAULT CURRENT_TIMESTAMP
+            )
+        """)
+
+        connection.execute("""
+            CREATE INDEX IF NOT EXISTS
+                idx_questionnaire_astronaut_date
+            ON crew_questionnaire_responses (
+                astronaut_id,
+                measured_at_utc DESC
+            )
+        """)
+
+

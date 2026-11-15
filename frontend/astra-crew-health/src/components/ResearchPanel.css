@@ -1,90 +1,239 @@
 
 .astra-research {
+  --research-surface: rgba(20, 35, 51, 0.68);
+  --research-surface-hover: rgba(28, 46, 65, 0.78);
+  --research-border: rgba(145, 174, 194, 0.16);
+  --research-border-hover: rgba(145, 190, 215, 0.32);
+  --research-text: #edf4f8;
+  --research-secondary: #b4c5d2;
+  --research-muted: #8da2b2;
+  --research-accent: #55c3d4;
+  --research-danger: #ed8585;
+
+  min-width: 0;
   margin-top: 20px;
-  padding: 18px;
-  border: 1px solid rgba(134, 183, 209, 0.2);
-  border-radius: 12px;
-  background: rgba(26, 47, 65, 0.35);
-  color: #d9e8f0;
+  padding: 24px;
+  color: var(--research-secondary);
+  background: var(--research-surface);
+  border: 1px solid var(--research-border);
+  border-radius: 15px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.astra-research *,
+.astra-research *::before,
+.astra-research *::after {
+  box-sizing: border-box;
 }
 
 .astra-research-heading {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: #7dd3fc;
+  gap: 12px;
+  min-width: 0;
+  margin-bottom: 15px;
+  color: var(--research-accent);
+}
+
+.astra-research-heading > svg {
+  flex-shrink: 0;
+  color: var(--research-accent);
 }
 
 .astra-research-heading h3 {
   margin: 0;
+  color: var(--research-text);
   font-size: 16px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  line-height: 1.4;
 }
 
 .astra-research h4 {
-  margin: 20px 0 10px;
-  font-size: 13px;
-  color: #e2f1f8;
+  margin: 24px 0 13px;
+  color: var(--research-text);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.3px;
+  line-height: 1.5;
 }
 
 .astra-research-description,
 .astra-research-hazard p,
 .astra-research li {
-  color: #a9bfcd;
-  font-size: 13px;
-  line-height: 1.6;
+  color: var(--research-secondary);
+  font-size: 12px;
+  line-height: 1.75;
+}
+
+.astra-research-description {
+  margin: 0 0 18px;
+  max-width: 850px;
 }
 
 .astra-research-hazards {
   display: grid;
-  gap: 10px;
+  grid-template-columns: 1fr;
+  gap: 11px;
 }
 
 .astra-research-hazard {
-  padding: 12px;
-  border-radius: 9px;
-  border: 1px solid rgba(134, 183, 209, 0.12);
-  background: rgba(39, 76, 96, 0.25);
+  min-width: 0;
+  padding: 16px 18px;
+  background: rgba(9, 22, 35, 0.35);
+  border: 1px solid var(--research-border);
+  border-radius: 11px;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.astra-research-hazard:hover {
+  background: var(--research-surface-hover);
+  border-color: var(--research-border-hover);
 }
 
 .astra-research-hazard strong {
-  font-size: 13px;
-  color: #d8edf7;
+  display: block;
+  color: var(--research-text);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.5;
 }
 
 .astra-research-hazard p {
-  margin: 6px 0 0;
+  margin: 8px 0 0;
+  color: var(--research-secondary);
 }
 
 .astra-research ul {
-  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin: 12px 0 0;
+  padding-left: 21px;
+}
+
+.astra-research li {
+  padding-left: 3px;
+}
+
+.astra-research li::marker {
+  color: var(--research-accent);
 }
 
 .astra-research-sources {
   display: flex;
   flex-direction: column;
-  gap: 9px;
+  align-items: flex-start;
+  gap: 11px;
 }
 
 .astra-research-sources a {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  color: #67d8ee;
+  gap: 7px;
+  max-width: 100%;
+  color: var(--research-accent);
   font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
   text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease;
 }
 
 .astra-research-sources a:hover {
+  color: #80d8e5;
   text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.astra-research-sources a svg {
+  flex-shrink: 0;
+}
+
+.astra-research-sources a:focus-visible {
+  outline: 2px solid var(--research-accent);
+  outline-offset: 4px;
+  border-radius: 3px;
 }
 
 .astra-research-disclaimer {
-  margin-top: 20px;
-  color: #849ba9;
+  margin: 23px 0 0;
+  padding: 14px 16px;
+  color: var(--research-muted);
+  background: rgba(9, 22, 35, 0.35);
+  border: 1px solid var(--research-border);
+  border-left: 3px solid rgba(85, 195, 212, 0.55);
+  border-radius: 9px;
   font-size: 11px;
-  line-height: 1.5;
+  line-height: 1.75;
 }
 
 .astra-research-error {
-  color: #f87171;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 12px 0;
+  padding: 13px 15px;
+  color: var(--research-danger);
+  background: rgba(237, 133, 133, 0.07);
+  border: 1px solid rgba(237, 133, 133, 0.25);
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.astra-research-error svg {
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .astra-research {
+    padding: 20px;
+    margin-top: 16px;
+  }
+
+  .astra-research-heading h3 {
+    font-size: 15px;
+  }
+
+  .astra-research-hazard {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .astra-research {
+    padding: 17px;
+    border-radius: 12px;
+  }
+
+  .astra-research-heading {
+    gap: 10px;
+  }
+
+  .astra-research h4 {
+    margin-top: 21px;
+  }
+
+  .astra-research-hazard {
+    padding: 13px 14px;
+  }
+
+  .astra-research-disclaimer {
+    padding: 12px 13px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .astra-research *,
+  .astra-research *::before,
+  .astra-research *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

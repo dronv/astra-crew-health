@@ -185,7 +185,7 @@ def get_crew_trends(
     days: int = Query(default=7, ge=1, le=90),
     end_date: date | None = None
 ):
-    end = end_date or date.today()
+    end = end_date or datetime.now(timezone.utc).date()
     start = end - timedelta(days=days - 1)
 
     logs = fetch_logs(

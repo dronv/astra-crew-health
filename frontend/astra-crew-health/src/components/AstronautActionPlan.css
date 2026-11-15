@@ -1,0 +1,175 @@
+
+.astra-awareness {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  color: #e8f3ff;
+}
+
+.astra-awareness-header {
+  padding: 22px 24px;
+  background: rgba(11, 26, 49, 0.85);
+  border: 1px solid rgba(73, 151, 198, 0.2);
+  border-radius: 16px;
+}
+
+.astra-awareness-eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  color: #57d9e8;
+  font-weight: 700;
+}
+
+.astra-awareness-header h2 {
+  font-size: 22px;
+  margin: 10px 0 8px;
+}
+
+.astra-awareness-header p {
+  color: #9bb1c9;
+  font-size: 13px;
+  margin: 0;
+}
+
+.astra-awareness-card {
+  background: rgba(9, 24, 45, 0.9);
+  border: 1px solid rgba(91, 148, 190, 0.2);
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.astra-awareness-card.attention {
+  border-left: 3px solid #f0b84b;
+}
+
+.astra-awareness-card.action {
+  border-left: 3px solid #f26a78;
+}
+
+.astra-awareness-card.normal {
+  border-left: 3px solid #39cba8;
+}
+
+.astra-awareness-toggle {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 19px 22px;
+  background: transparent;
+  border: none;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.astra-awareness-system {
+  color: #69d9ed;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+}
+
+.astra-awareness-toggle h3 {
+  margin: 7px 0;
+  font-size: 16px;
+}
+
+.astra-awareness-reading {
+  font-size: 12px;
+  color: #a7bdd3;
+}
+
+.astra-awareness-status {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  padding: 7px 10px;
+  border-radius: 7px;
+  white-space: nowrap;
+}
+
+.astra-awareness-status.attention {
+  background: rgba(240, 184, 75, 0.15);
+  color: #f0b84b;
+}
+
+.astra-awareness-status.action {
+  background: rgba(242, 106, 120, 0.15);
+  color: #f26a78;
+}
+
+.astra-awareness-status.normal {
+  background: rgba(57, 203, 168, 0.15);
+  color: #39cba8;
+}
+
+.astra-awareness-status.unavailable {
+  background: rgba(148, 163, 184, 0.12);
+  color: #a6b4c7;
+}
+
+.astra-awareness-content {
+  padding: 0 22px 22px;
+  border-top: 1px solid rgba(91, 148, 190, 0.15);
+}
+
+.astra-awareness-content h4 {
+  font-size: 12px;
+  color: #6ed7e7;
+  margin: 20px 0 9px;
+}
+
+.astra-awareness-content p {
+  font-size: 13px;
+  color: #b0c3d6;
+  line-height: 1.7;
+}
+
+.astra-awareness-content ol {
+  padding-left: 22px;
+}
+
+.astra-awareness-content li {
+  margin-bottom: 14px;
+  padding-left: 5px;
+  font-size: 13px;
+}
+
+.astra-awareness-content li strong {
+  color: #e6f4ff;
+}
+
+.astra-awareness-content li p {
+  margin: 5px 0 0;
+}
+
+.astra-awareness-sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.astra-awareness-sources a {
+  font-size: 12px;
+  color: #62d6ed;
+  text-decoration: none;
+  padding: 8px 11px;
+  border: 1px solid rgba(98, 214, 237, 0.2);
+  border-radius: 8px;
+}
+
+.astra-awareness-sources a:hover {
+  background: rgba(98, 214, 237, 0.08);
+}
+
+.astra-awareness-error {
+  color: #f26a78;
+}
+
+.astra-awareness-disclaimer {
+  font-size: 11px;
+  color: #8298b2;
+  line-height: 1.6;
+}

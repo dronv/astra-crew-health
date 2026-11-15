@@ -4,7 +4,6 @@ import "./App.css";
 
 import useTelemetry from "./hooks/useTelemetry";
 import {
-  getCognitiveScenario,
   setSimulationMode,
 } from "./api/astraApi";
 
@@ -12,8 +11,8 @@ import DashboardNav from "./components/dashboard/DashboardNav";
 import DashboardHeader from "./components/dashboard/DashboardHeader";
 import HealthStatusBanner from "./components/dashboard/HealthStatusBanner";
 import PhysiologicalIndicators from "./components/dashboard/PhysiologicalIndicators";
-import HeartRateTrend from "./components/dashboard/HeartRateTrend";
 import CognitivePanel from "./components/dashboard/CognitivePanel";
+import HeartRateTrend from "./components/dashboard/HeartRateTrend";
 import HealthInsights from "./components/dashboard/HealthInsights";
 import SimulationPanel from "./components/dashboard/SimulationPanel";
 
@@ -34,15 +33,11 @@ function App() {
 
   const [activeTab, setActiveTab] = useState("overview");
   const [showAssessment, setShowAssessment] = useState(false);
-
+  const [cognitive, setCognitive] = useState(null);
   const [mode, setMode] = useState("NORMAL");
   const [simulationLoading, setSimulationLoading] = useState(false);
   const [simulationError, setSimulationError] = useState("");
 
-  const [cognitive, setCognitive] = useState(null);
-  const [cognitiveScenario, setCognitiveScenario] = useState("normal");
-  const [cognitiveLoading, setCognitiveLoading] = useState(false);
-  const [cognitiveError, setCognitiveError] = useState("");
 
   const status = health?.status || "CALIBRATING";
 
@@ -57,21 +52,6 @@ function App() {
       setSimulationError(error.message);
     } finally {
       setSimulationLoading(false);
-    }
-  }
-
-  async function loadCognitiveScenario(scenario) {
-    setCognitiveLoading(true);
-    setCognitiveError("");
-
-    try {
-      const result = await getCognitiveScenario(scenario);
-      setCognitive(result);
-      setCognitiveScenario(scenario);
-    } catch (error) {
-      setCognitiveError(error.message);
-    } finally {
-      setCognitiveLoading(false);
     }
   }
 
@@ -103,7 +83,7 @@ function App() {
                 className="astra-secondary-button"
                 onClick={() => setActiveTab("daily")}
               >
-                Open Daily Health
+                Open Daily Health Journal
               </button>
             </div>
 
@@ -119,19 +99,17 @@ function App() {
                 history={history}
                 telemetry={telemetry}
               />
-
               <CognitivePanel
-                cognitive={cognitive}
-                scenario={cognitiveScenario}
-                loading={cognitiveLoading}
-                error={cognitiveError}
-                onScenarioChange={loadCognitiveScenario}
+                astronautId="CREW-001"
+                onUpdate={setCognitive}
               />
             </section>
 
             <HealthInsights
               health={health}
               status={status}
+              cognitive={cognitive}
+              astronautId="CREW-001"
               onStartAssessment={() => setShowAssessment(true)}
             />
           </div>
@@ -154,7 +132,7 @@ function App() {
 
             <BodyHealthMap
               health={health}
-              cognitive={cognitive}
+              astronautId="CREW-001"
             />
           </div>
         )}

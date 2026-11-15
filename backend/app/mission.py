@@ -146,13 +146,6 @@ def active_mission():
 
 @router.get("/clock")
 def get_clock(at_utc: datetime | None = None):
-    mission = get_active_mission()
-
-    if not mission:
-        raise HTTPException(
-            status_code=404,
-            detail="No active mission configured."
-        )
 
     if at_utc is not None and at_utc.tzinfo is None:
         raise HTTPException(
@@ -160,4 +153,27 @@ def get_clock(at_utc: datetime | None = None):
             detail="at_utc must include a timezone offset."
         )
 
-    return mission_clock(mission, now=at_utc)
+    mission = get_active_mission()
+
+    if not mission:
+        return {
+            "active": False,
+            "mission_id": None,
+            "mission_name": None,
+            "mission_type": None,
+            "astronaut_id": None,
+            "start_utc": None,
+            "current_utc": datetime.now(timezone.utc).isoformat(),
+            "day_label": "Mission Day",
+            "day_number": 0,
+            "elapsed_seconds": 0,
+            "planned_days": 0,
+            "remaining_days": 0,
+            "started": False,
+            "message": "No active mission configured."
+        }
+
+    return {
+        "active": True,
+        **mission_clock(mission, now=at_utc)
+    }

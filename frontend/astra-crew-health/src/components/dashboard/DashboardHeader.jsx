@@ -11,7 +11,7 @@ export default function DashboardHeader({ connection }) {
         </div>
 
         <div>
-          <h1>ASTRA</h1>
+          <h1>ASTRA LAB</h1>
           <p>ASTRONAUT HEALTH MONITOR</p>
         </div>
       </div>

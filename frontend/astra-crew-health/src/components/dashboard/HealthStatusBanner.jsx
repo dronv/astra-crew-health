@@ -19,7 +19,7 @@ export default function HealthStatusBanner({ status, mode }) {
 
       <div className="status-content">
         <span className="section-label">CREW HEALTH STATUS</span>
-        <h2>{status}</h2>
+        <h2 className={`status-name ${statusClass}`}>{status}</h2>
         <p>{getStatusMessage(status)}</p>
       </div>
 
