@@ -1,0 +1,175 @@
+
+.assessment-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(3, 10, 20, 0.82);
+  backdrop-filter: blur(8px);
+}
+
+.assessment-modal {
+  width: 100%;
+  max-width: 570px;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 28px;
+  border: 1px solid rgba(125, 211, 252, 0.2);
+  border-radius: 16px;
+  background: #101e30;
+  color: #e2e8f0;
+  box-shadow: 0 20px 70px rgba(0, 0, 0, 0.4);
+}
+
+.assessment-header,
+.assessment-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.assessment-header h2 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 0;
+  font-size: 20px;
+}
+
+.assessment-eyebrow {
+  color: #67e8f9;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+}
+
+.assessment-close {
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.assessment-progress {
+  margin: 30px 0;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.assessment-progress-track {
+  height: 5px;
+  margin-top: 10px;
+  overflow: hidden;
+  border-radius: 5px;
+  background: #26384d;
+}
+
+.assessment-progress-track div {
+  height: 100%;
+  background: #22d3ee;
+  transition: width 0.25s ease;
+}
+
+.assessment-question h3 {
+  margin: 12px 0 22px;
+  font-size: 21px;
+}
+
+.assessment-options {
+  display: grid;
+  gap: 10px;
+}
+
+.assessment-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #34465b;
+  border-radius: 10px;
+  background: #192b40;
+  color: #e2e8f0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.assessment-option:hover,
+.assessment-option.selected {
+  border-color: #22d3ee;
+  background: #1c4052;
+}
+
+.assessment-actions {
+  margin-top: 30px;
+}
+
+.assessment-primary,
+.assessment-secondary {
+  padding: 12px 18px;
+  border-radius: 9px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.assessment-primary {
+  background: #22d3ee;
+  color: #08202e;
+}
+
+.assessment-secondary {
+  background: #26384d;
+  color: #dbeafe;
+}
+
+.assessment-primary:disabled,
+.assessment-secondary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.assessment-result-heading {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 28px;
+  color: #67e8f9;
+}
+
+.assessment-result-heading h3 {
+  margin: 5px 0;
+}
+
+.assessment-result h4 {
+  margin: 24px 0 8px;
+}
+
+.assessment-result li {
+  margin-bottom: 9px;
+  color: #b6c7d8;
+  line-height: 1.5;
+}
+
+.assessment-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-top: 24px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #1a3043;
+  color: #a8bdcb;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+@media (max-width: 600px) {
+  .assessment-modal {
+    padding: 20px;
+  }
+}

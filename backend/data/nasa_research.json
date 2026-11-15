@@ -1,0 +1,151 @@
+
+{
+  "version": "1.0",
+  "title": "ASTRA Spaceflight Health Research",
+  "disclaimer": "Educational research context only.",
+  "sources": [
+    {
+      "id": "NASA_HAZARDS",
+      "organization": "NASA",
+      "title": "Five Hazards of Human Spaceflight",
+      "url": "https://www.nasa.gov/hrp/hazards/"
+    },
+    {
+      "id": "NASA_RISKS",
+      "organization": "NASA",
+      "title": "Risks of Human Spaceflight",
+      "url": "https://www.nasa.gov/hrp/risks/"
+    },
+    {
+      "id": "NASA_RESEARCH",
+      "organization": "NASA",
+      "title": "Ongoing HRP Research in Space",
+      "url": "https://www.nasa.gov/hrp/ongoing-hrp-research/"
+    },
+    {
+      "id": "CSA_RADIATION",
+      "organization": "Canadian Space Agency",
+      "title": "Monitoring Radiation for Astronaut Health",
+      "url": "https://www.asc-csa.gc.ca/eng/news/articles/2026/2026-02-26-monitoring-radiation-astronaut-health.asp"
+    },
+    {
+      "id": "CSA_SCIENCE",
+      "organization": "Canadian Space Agency",
+      "title": "Why Do We Conduct Science Experiments in Space?",
+      "url": "https://www.asc-csa.gc.ca/eng/iss/science/why-do-we-conduct-science-experiments-in-space.asp"
+    }
+  ],
+  "hazards": [
+    {
+      "id": "altered_gravity",
+      "name": "Altered Gravity",
+      "description": "Changes in gravity affect the cardiovascular system, muscles, bones, balance, and other body functions.",
+      "systems": ["heart", "bones"],
+      "monitoring_context": [
+        "Review cardiovascular measurements alongside recent activity.",
+        "Track exercise and physical conditioning.",
+        "Use dedicated assessments for muscle and bone health."
+      ],
+      "source_ids": [
+        "NASA_HAZARDS",
+        "NASA_RISKS",
+        "CSA_SCIENCE"
+      ]
+    },
+    {
+      "id": "isolation",
+      "name": "Isolation and Confinement",
+      "description": "Long-duration isolation, sleep disruption, circadian changes, and workload can affect behavioral health and performance.",
+      "systems": ["brain"],
+      "monitoring_context": [
+        "Ask about sleep quality and fatigue.",
+        "Review perceived workload and concentration.",
+        "Use self-reported information alongside cognitive assessments."
+      ],
+      "source_ids": [
+        "NASA_HAZARDS",
+        "NASA_RISKS"
+      ]
+    },
+    {
+      "id": "distance",
+      "name": "Distance from Earth",
+      "description": "Long distances and communication delays increase the importance of onboard decision support and crew self-sufficiency.",
+      "systems": ["brain", "heart", "lungs", "bones"],
+      "monitoring_context": [
+        "Provide clear onboard explanations.",
+        "Support structured self-assessment.",
+        "Preserve measurements for later medical review."
+      ],
+      "source_ids": [
+        "NASA_HAZARDS",
+        "NASA_RISKS"
+      ]
+    },
+    {
+      "id": "hostile_environment",
+      "name": "Hostile or Closed Environments",
+      "description": "Spacecraft environmental factors such as atmosphere, pressure, temperature, noise, and microbial conditions can affect crew health.",
+      "systems": ["lungs", "brain"],
+      "monitoring_context": [
+        "Review respiratory indicators in environmental context.",
+        "Consider spacecraft air-quality and pressure measurements when available.",
+        "Do not infer cabin air quality from physiological telemetry alone."
+      ],
+      "source_ids": [
+        "NASA_HAZARDS",
+        "NASA_RISKS"
+      ]
+    },
+    {
+      "id": "radiation",
+      "name": "Space Radiation",
+      "description": "Space radiation is an important health hazard requiring dedicated exposure monitoring and protective measures.",
+      "systems": ["brain", "bones"],
+      "monitoring_context": [
+        "Explain the importance of radiation monitoring.",
+        "Use dedicated radiation instruments for exposure measurements.",
+        "Do not estimate radiation dose from heart rate or cognitive predictions."
+      ],
+      "source_ids": [
+        "NASA_HAZARDS",
+        "NASA_RISKS",
+        "CSA_RADIATION"
+      ]
+    }
+  ],
+  "system_guidance": {
+    "heart": {
+      "title": "Cardiovascular Health",
+      "description": "Spaceflight-related gravity changes can affect cardiovascular conditioning.",
+      "assessment_questions": [
+        "Were you exercising before this measurement?",
+        "Are you experiencing dizziness or unusual fatigue?"
+      ]
+    },
+    "lungs": {
+      "title": "Respiratory Health",
+      "description": "Respiratory indicators should be interpreted alongside activity and spacecraft environmental conditions.",
+      "assessment_questions": [
+        "Are you experiencing breathing discomfort?",
+        "Were you physically active before this reading?"
+      ]
+    },
+    "brain": {
+      "title": "Cognitive and Behavioral Health",
+      "description": "Sleep, workload, isolation, and other mission factors can influence crew performance.",
+      "assessment_questions": [
+        "How well did you sleep?",
+        "Are you having difficulty concentrating?"
+      ]
+    },
+    "bones": {
+      "title": "Musculoskeletal Health",
+      "description": "Altered gravity can contribute to muscle and bone changes over long missions.",
+      "assessment_questions": [
+        "Have you completed your planned exercise?",
+        "Are you experiencing muscle weakness or discomfort?"
+      ]
+    }
+  }
+}

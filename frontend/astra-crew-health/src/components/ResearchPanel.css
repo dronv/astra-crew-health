@@ -1,0 +1,90 @@
+
+.astra-research {
+  margin-top: 20px;
+  padding: 18px;
+  border: 1px solid rgba(134, 183, 209, 0.2);
+  border-radius: 12px;
+  background: rgba(26, 47, 65, 0.35);
+  color: #d9e8f0;
+}
+
+.astra-research-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #7dd3fc;
+}
+
+.astra-research-heading h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.astra-research h4 {
+  margin: 20px 0 10px;
+  font-size: 13px;
+  color: #e2f1f8;
+}
+
+.astra-research-description,
+.astra-research-hazard p,
+.astra-research li {
+  color: #a9bfcd;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.astra-research-hazards {
+  display: grid;
+  gap: 10px;
+}
+
+.astra-research-hazard {
+  padding: 12px;
+  border-radius: 9px;
+  border: 1px solid rgba(134, 183, 209, 0.12);
+  background: rgba(39, 76, 96, 0.25);
+}
+
+.astra-research-hazard strong {
+  font-size: 13px;
+  color: #d8edf7;
+}
+
+.astra-research-hazard p {
+  margin: 6px 0 0;
+}
+
+.astra-research ul {
+  padding-left: 20px;
+}
+
+.astra-research-sources {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.astra-research-sources a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: #67d8ee;
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.astra-research-sources a:hover {
+  text-decoration: underline;
+}
+
+.astra-research-disclaimer {
+  margin-top: 20px;
+  color: #849ba9;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.astra-research-error {
+  color: #f87171;
+}
