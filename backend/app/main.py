@@ -45,10 +45,15 @@ TELEMETRY_SAVE_INTERVAL = 30
 SIMULATED_ASTRONAUT_ID = "CREW-001"
 
 FRONTEND_ORIGINS = [
-    origin.strip()
+    origin.strip().rstrip("/")
     for origin in os.getenv(
         "FRONTEND_ORIGINS",
-        "http://localhost:5173,http://127.0.0.1:5173",
+        (
+            "http://localhost:5173,"
+            "http://127.0.0.1:5173,"
+            "https://astracrew.health,"
+            "https://www.astracrew.health"
+        ),
     ).split(",")
     if origin.strip()
 ]
