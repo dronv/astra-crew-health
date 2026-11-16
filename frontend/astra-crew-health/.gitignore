@@ -1,5 +1,16 @@
+# =====================================
+# Node.js / React / Vite
+# =====================================
+node_modules/
+dist/
+dist-ssr/
+.vite/
+coverage/
+
+# =====================================
 # Logs
-logs
+# =====================================
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -7,16 +18,50 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
+# =====================================
+# Environment Variables
+# =====================================
+.env
+.env.*
+!.env.example
+!.env.production.example
 *.local
 
-# Editor directories and files
+# =====================================
+# Python / FastAPI
+# =====================================
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+env/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# =====================================
+# SQLite Database
+# =====================================
+backend/data/*.db
+backend/data/*.db-shm
+backend/data/*.db-wal
+backend/data/*.sqlite
+backend/data/*.sqlite3
+
+# =====================================
+# Vercel
+# =====================================
+.vercel/
+
+# =====================================
+# IDE / OS
+# =====================================
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
+Thumbs.db
 *.suo
 *.ntvs*
 *.njsproj

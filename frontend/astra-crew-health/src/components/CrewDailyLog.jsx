@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Moon, Dumbbell, Activity, Save } from "lucide-react";
 import "./CrewDailyLog.css";
 
-const API_BASE = "http://localhost:8000";
+const API_BASE = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000";
 
 function todayLocal() {
   const now = new Date();

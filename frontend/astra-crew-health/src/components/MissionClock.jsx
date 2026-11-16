@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Clock3, Orbit } from "lucide-react";
 
-const API_BASE = "http://localhost:8000";
+import { API_BASE } from "../api/astraApi";
 
 export default function MissionClock() {
   const [mission, setMission] = useState(null);
